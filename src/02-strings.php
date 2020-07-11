@@ -36,7 +36,6 @@ function mb_strrev($str){
 }
 function mirrorMultibyteString(string $input )
 {
-
     $words = mb_split(' ', $input);
     $result = '';
 
