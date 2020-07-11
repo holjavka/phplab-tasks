@@ -1,11 +1,14 @@
 {
     "autoload": {
         "files": [
-            "src/01-basics.php"
+            "src/01-basics.php",
+            "src/02-strings.php",
+            "src/03-arrays.php"
         ]
     },
     "require": {
         "php": "^7.3",
-        "phpunit/phpunit": "^9.2"
+        "phpunit/phpunit": "^9.2",
+
     }
 }
