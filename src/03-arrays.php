@@ -51,6 +51,7 @@ function getUniqueValue(array $input)
     }
     else
         return 0;
+
 }
 
 /**
