@@ -19,7 +19,7 @@ function repeatArrayValues(array $input)
             }
         }
     }
-    return $result ;
+    return $result;
 }
 
 /**
