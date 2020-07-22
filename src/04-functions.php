@@ -10,6 +10,7 @@ function sayHello()
     return 'Hello';
 }
 
+
 /**
  * Create a PhpUnit test (SayHelloArgumentTest) which will check that function below returns a correct result
  * Check how it works with: number, string, bool value
@@ -21,6 +22,7 @@ function sayHelloArgument($arg)
 {
     return "Hello $arg";
 }
+
 
 /**
  * What can be put instead of placeholder
@@ -35,9 +37,14 @@ function sayHelloArgument($arg)
  */
 function sayHelloArgumentWrapper($arg)
 {
-    // put your code here
-
-    return sayHelloArgument($arg);
+    if(!is_numeric($arg) && !is_string($arg) && !is_bool($arg) )
+        {
+        throw new InvalidArgumentException("Wrong format , cant be number, string or bool");
+        }
+    else
+        {
+        return sayHelloArgument($arg);
+        }
 }
 
 /**
@@ -69,5 +76,11 @@ function countArguments()
  */
 function countArgumentsWrapper()
 {
-    // put your code here
+    foreach (func_get_args() as $arg){
+        if (!is_string($arg))
+            throw new InvalidArgumentException("Some argument not string");
+
+    }
+    return countArguments();
+
 }
