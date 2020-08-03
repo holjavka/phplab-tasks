@@ -17,6 +17,15 @@ if (isset($_GET['filter_by_first_letter'])) {
 if (isset($_GET['sort_by_state'])) {
     $airports = filterAirportByState($airports);
 }
+if (isset($_GET['sort_by_name'])) {
+    $airports = filterAirportByName($airports);
+}
+if (isset($_GET['sort_by_city'])) {
+    $airports = filterAirportByCity($airports);
+}
+if (isset($_GET['sort_by_code'])) {
+    $airports = filterAirportByCode($airports);
+}
 // Sorting
 /**
  * Here you need to check $_GET request if it has sorting key
@@ -25,6 +34,8 @@ if (isset($_GET['sort_by_state'])) {
  */
 
 // Pagination
+echo $page = isset($_GET['page']) ? (int)$_GET['page'] : 1 ;
+$perPage = isset($_GET['per-page']) && $_GET['per-page'] <=50 ? (int)$_GET['per-page'] : 5;
 /**
  * Here you need to check $_GET request if it has pagination key
  * and apply pagination logic
@@ -79,10 +90,10 @@ if (isset($_GET['sort_by_state'])) {
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"><a href="#">Name</a></th>
-            <th scope="col"><a href="#">Code</a></th>
+            <th scope="col"><a href="/?sort_by_name">Name</a></th>
+            <th scope="col"><a href="/?sort_by_code">Code</a></th>
             <th scope="col"><a href="/?sort_by_state">State</a></th>
-            <th scope="col"><a href="#">City</a></th>
+            <th scope="col"><a href="/?sort_by_city">City</a></th>
             <th scope="col">Address</th>
             <th scope="col">Timezone</th>
         </tr>

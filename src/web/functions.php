@@ -43,3 +43,24 @@ function filterAirportByState($airports)
     return $airports;
 
 }
+function filterAirportByName($airports)
+{
+    $columns = array_column($airports, 'name');
+    array_multisort($columns, SORT_ASC, $airports);
+    return $airports;
+
+}
+function filterAirportByCity($airports)
+{
+    $columns = array_column($airports, 'city');
+    array_multisort($columns, SORT_ASC, $airports);
+    return $airports;
+
+}
+function filterAirportByCode($airports)
+{
+    $columns = array_column($airports, 'code');
+    array_multisort($columns, SORT_ASC, $airports);
+    return $airports;
+
+}
