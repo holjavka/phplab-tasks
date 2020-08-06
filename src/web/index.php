@@ -14,7 +14,6 @@ if (isset($_GET['filter_by_first_letter'])) {
     $airports = filteringAirportByFirstLetter($airports, $letter);
 }
 
-
 // Sorting
 if (isset($_GET['sort'])) {
     $airports = filterAirportByState($airports);
@@ -29,7 +28,7 @@ if (isset($_GET['sort_by_code'])) {
     $airports = filterAirportByCode($airports);
 }
 if (isset($_GET['sort_by_state'])) {
-    $airports = SortByState($airports, $_GET['filter_by_state']);
+    $airports = SortByState($airports, $_GET['sort_by_state']);
 }
 /**
  * Here you need to check $_GET request if it has sorting key
