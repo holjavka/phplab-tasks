@@ -64,3 +64,9 @@ function filterAirportByCode($airports)
     return $airports;
 
 }
+
+function SortByState($airports, $state){
+    return array_filter($airports, function ($airports) use ($state) {
+        return $airports['state'] == $state;
+    });
+}

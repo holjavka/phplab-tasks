@@ -14,7 +14,9 @@ if (isset($_GET['filter_by_first_letter'])) {
     $airports = filteringAirportByFirstLetter($airports, $letter);
 }
 
-if (isset($_GET['sort_by_state'])) {
+
+// Sorting
+if (isset($_GET['sort'])) {
     $airports = filterAirportByState($airports);
 }
 if (isset($_GET['sort_by_name'])) {
@@ -26,7 +28,9 @@ if (isset($_GET['sort_by_city'])) {
 if (isset($_GET['sort_by_code'])) {
     $airports = filterAirportByCode($airports);
 }
-// Sorting
+if (isset($_GET['sort_by_state'])) {
+    $airports = SortByState($airports, $_GET['filter_by_state']);
+}
 /**
  * Here you need to check $_GET request if it has sorting key
  * and apply sorting
@@ -34,8 +38,14 @@ if (isset($_GET['sort_by_code'])) {
  */
 
 // Pagination
-echo $page = isset($_GET['page']) ? (int)$_GET['page'] : 1 ;
-$perPage = isset($_GET['per-page']) && $_GET['per-page'] <=50 ? (int)$_GET['per-page'] : 5;
+$perPage = 5;
+$pages = ceil(count($airports) / $perPage);
+$page = $_GET['page'] ?? 1;
+$startPage = max($page > 1 ? $page - 1 : $page, $page - $perPage);
+$endPage = min($page + 5, $pages);
+
+$airports = array_slice($airports, ($page - 1) * 5 , $perPage);
+
 /**
  * Here you need to check $_GET request if it has pagination key
  * and apply pagination logic
@@ -90,10 +100,10 @@ $perPage = isset($_GET['per-page']) && $_GET['per-page'] <=50 ? (int)$_GET['per-
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"><a href="/?sort_by_name">Name</a></th>
-            <th scope="col"><a href="/?sort_by_code">Code</a></th>
-            <th scope="col"><a href="/?sort_by_state">State</a></th>
-            <th scope="col"><a href="/?sort_by_city">City</a></th>
+            <th scope="col"><a href="/?<?= http_build_query(array_merge($_GET, ['sort_by_name' => 'name'])) ?>">Name</a></th>
+            <th scope="col"><a href="/?<?= http_build_query(array_merge($_GET, ['sort_by_code' => 'code'])) ?>">Code</a></th>
+            <th scope="col"><a href="/?<?= http_build_query(array_merge($_GET, ['sort' => 'state'])) ?>">State</a></th>
+            <th scope="col"><a href="/?<?= http_build_query(array_merge($_GET, ['sort_by_city' => 'city'])) ?>">City</a></th>
             <th scope="col">Address</th>
             <th scope="col">Timezone</th>
         </tr>
@@ -113,7 +123,8 @@ $perPage = isset($_GET['per-page']) && $_GET['per-page'] <=50 ? (int)$_GET['per-
         <tr>
             <td><?= $airport['name'] ?></td>
             <td><?= $airport['code'] ?></td>
-            <td><a href="#"><?= $airport['state'] ?></a></td>
+            <td><a href="?<?= http_build_query(array_merge($_GET, ['sort_by_state' => $airport['state']])) ?>">
+                    <?= $airport['state'] ?></a></td>
             <td><?= $airport['city'] ?></td>
             <td><?= $airport['address'] ?></td>
             <td><?= $airport['timezone'] ?></td>
@@ -133,9 +144,12 @@ $perPage = isset($_GET['per-page']) && $_GET['per-page'] <=50 ? (int)$_GET['per-
     -->
     <nav aria-label="Navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+                    <a class="page-link"
+                       href="/?<?= http_build_query(array_merge($_GET, ['page' => $i])) ?>"><?= $i ?></a>
+                </li>
+            <?php endfor ?>
         </ul>
     </nav>
 
