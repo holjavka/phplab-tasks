@@ -14,12 +14,12 @@ require "Request.php"
 </head>
 <body>
 <?php
-$_POST['page']='321';
+$_POST['123']='321';
 $_GET['page']='2';
 $test = new Request($_GET,$_POST);
-echo $test->get('page');
-var_dump($test->all([1,2]));
-print_r($test->query);
+
+var_dump($test->userAgent());
+
 ?>
 
 </body>

@@ -55,4 +55,22 @@ class Request
         }
     }
 
+    public function has($key)
+    {
+        if ((array_key_exists($key, $this->query)) || (array_key_exists($key, $this->post))) {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public function ip()
+    {
+        return $_SERVER['REMOTE_ADDR'];
+    }
+    public function userAgent()
+    {
+        return $_SERVER['HTTP_USER_AGENT'];
+    }
+
 }
