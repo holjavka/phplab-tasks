@@ -1,6 +1,7 @@
 <?php
 
-require "Request.php"
+require "Request.php";
+
 ?>
 
 <!doctype html>
@@ -14,11 +15,15 @@ require "Request.php"
 </head>
 <body>
 <?php
-$_POST['123']='321';
-$_GET['page']='2';
-$test = new Request($_GET,$_POST);
+$_POST['123']='42';
+$_GET['page']='32';
+$_SESSION['222'] = 42;
+$cookies = new Cookies($_COOKIE);
+$session = new Sessions($_SESSION);
+$test = new Request($_GET,$_POST,$session,$cookies);
+print_r( $test->session->all([42]));
+print_r( $test->cookies->remove('222'));
 
-var_dump($test->userAgent());
 
 ?>
 

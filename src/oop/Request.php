@@ -1,15 +1,16 @@
 <?php
-
+require "Sessions.php";
+require "Cookies.php";
 
 class Request
 {
 
-
-    public function __construct(array $query,array $post)
+    public function __construct(array $query,array $post, Sessions $session,Cookies $cookies )
     {
         $this->query = $query;
         $this->post = $post;
-
+        $this->session = $session;
+        $this->cookies = $cookies;
     }
 
     public function query(string $key, $default = null) : string
@@ -26,7 +27,7 @@ class Request
         if (array_key_exists($key, $this->post)) {
             return $this->post[$key];
         } else {
-            return $default;
+            return strval($default);
         }
     }
     public function get(string $key, $default = null) : string
