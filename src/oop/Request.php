@@ -69,11 +69,11 @@ class Request
 
     public function ip()
     {
-        return $_SERVER['REMOTE_ADDR'];
+        return $this->server['REMOTE_ADDR'];
     }
     public function userAgent()
     {
-        return $_SERVER['HTTP_USER_AGENT'];
+        return $this->server['HTTP_USER_AGENT'];
     }
 
 }
