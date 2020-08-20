@@ -1,9 +1,8 @@
 <?php
 
-require "Request.php";
+require_once "Request.php";
 
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,9 +19,9 @@ $_GET['page']='32';
 $_SESSION['222'] = 42;
 $cookies = new Cookies($_COOKIE);
 $session = new Sessions($_SESSION);
-$test = new Request($_GET,$_POST,$session,$cookies);
+$test = new Request($_GET,$_POST,$_SERVER,$session,$cookies);
 print_r( $test->session->all([42]));
-print_r( $test->cookies->remove('222'));
+print ($cookies->get())
 
 
 ?>

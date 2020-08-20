@@ -1,16 +1,17 @@
 <?php
-require "Sessions.php";
-require "Cookies.php";
+require_once "Sessions.php";
+require_once "Cookies.php";
 
 class Request
 {
 
-    public function __construct(array $query,array $post, Sessions $session,Cookies $cookies )
+    public function __construct(array $query,array $post, array $server, Sessions $session,Cookies $cookies )
     {
         $this->query = $query;
         $this->post = $post;
         $this->session = $session;
         $this->cookies = $cookies;
+        $this->server = $server;
     }
 
     public function query(string $key, $default = null) : string
