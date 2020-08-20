@@ -7,6 +7,7 @@ class Sessions
 
     public function __construct(array $session)
     {
+
         session_start();
         $this->session = $session;
 
@@ -56,6 +57,7 @@ class Sessions
     {
         session_unset();
     }
+
 
 
 

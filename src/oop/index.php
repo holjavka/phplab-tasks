@@ -15,13 +15,14 @@ require_once "Request.php";
 </head>
 <body>
 <?php
+
 $_POST['123']='42';
 $_GET['page']='32';
-$_SESSION['222'] = 42;
+$_SESSION['222']=34;
 $cookies = new Cookies($_COOKIE);
 $session = new Sessions($_SESSION);
 $test = new Request($_GET,$_POST,$_SERVER,$session,$cookies);
-print_r( $test->session->all([42]));
+print_r( $test->session->all());
 
 
 

@@ -11,7 +11,7 @@ class Cookies
     }
 
 
-    public function all(Array $only=[]):array
+    public function all(array $only=[]):array
     {
         if (empty($only)) {
             return $this->cookies ;
