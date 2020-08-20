@@ -21,7 +21,7 @@ $cookies = new Cookies($_COOKIE);
 $session = new Sessions($_SESSION);
 $test = new Request($_GET,$_POST,$_SERVER,$session,$cookies);
 print_r( $test->session->all([42]));
-print ($cookies->get())
+
 
 
 ?>
